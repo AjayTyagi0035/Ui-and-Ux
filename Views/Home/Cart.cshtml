@@ -1,0 +1,26 @@
+﻿@model List<Project.Models.Product>
+
+@{
+    ViewData["Title"] = "Your Cart";
+}
+
+<h1>Your Cart</h1>
+
+<div>
+    @if (Model.Any())
+    {
+        foreach (var product in Model)
+        {
+            <div>
+                <h3>@product.Title</h3>
+                <p>@product.Description</p>
+                <p>@product.Price.ToString("C")</p>
+                <img src="@product.Thumbnail" alt="@product.Title" />
+            </div>
+        }
+    }
+    else
+    {
+        <p>Your cart is empty.</p>
+    }
+</div>

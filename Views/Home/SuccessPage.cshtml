@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "MyWebsite";
+}
+@model Project.Models.TestData
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<h1>
+    Successfully sigup
+    <a class="btn btn-outline-primary btn-custom" asp-action="Login" asp-controller="Home">Login</a>
+</h1>

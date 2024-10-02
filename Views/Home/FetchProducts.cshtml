@@ -1,0 +1,324 @@
+﻿@model List<Project.Models.Product>
+
+<style>
+    .navbar-brand {
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        color:green;
+        text-decoration: none;
+    }
+
+    .shopping-logo {
+        width: 50px;
+        margin-right: 10px;
+        font-size: 3rem;
+        font-weight: bolder;
+    }
+
+    .navbar-toggler-icon {
+        color: gray;
+    }
+
+    .navbar-brand-text {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px;
+        padding: 15px 20px;
+        transition: all 0.3s ease;
+    }
+
+    .navbar {
+        background-color: white;
+        padding: 30px 0;
+        font-size: 20px;
+        border-bottom: 2px solid white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar-nav {
+        justify-content: center;
+    }
+
+    .navbar .navbar-collapse {
+        justify-content: space-between;
+    }
+    .cart {
+        position: absolute;
+        top: 10px;
+        right: 200px;
+    }
+
+    .cart-icon {
+        font-size: 36px;
+        color: blue;
+    }
+
+    .custom-thumbnail {
+        width: 200px;
+        height: auto;
+    }
+
+    .action-cell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        display: flex;
+        align-items: center;
+    }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+    section {
+        padding: 2rem 9%;
+    }
+
+    .home {
+        border: 0px solid;
+        display: flex;
+        justify-content: left;
+        background-image: url('images/banner-img.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding-top: 10rem;
+        padding-bottom: 9rem;
+    }
+
+        .home .content {
+            border: 0px solid;
+            text-align: center;
+            width: 60rem;
+        }
+
+            .home .content h3 {
+                color: var(--black);
+                font-size: 3rem;
+            }
+
+                .home .content h3 span {
+                    color: green;
+                    font-size: 3rem;
+                }
+
+            .home .content p {
+                color: var(--light-color);
+                font-size: 1.4rem;
+                padding: 1rem 0;
+                line-height: 1.8;
+            }
+
+    .features .row .col {
+        display: grid;
+        text-align: center;
+        padding: 3rem 2rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+        .features .row .col:hover {
+            transform: scale(1.05);
+            box-shadow: 1px 1px 10px 4px #36C2CE;
+        }
+
+    .heading {
+        text-align: center;
+        padding: 2rem 0;
+        padding-bottom: 3rem;
+        font-size: 2.5rem;
+        color: black;
+    }
+
+        .heading span {
+            background: #2E236C;
+            color: white;
+            display: inline-block;
+            padding: .2rem 1.5rem;
+            clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0%);
+        }
+
+    .product-card {
+        margin-bottom: 30px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #36C2CE;
+        }
+
+    .product-thumbnail {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .product-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .product-description {
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .product-price {
+        font-size: 1.1rem;
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .product-action {
+        text-align: center;
+        margin-top: 10px;
+    }
+</style>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="logo" asp-action="Index" asp-controller="Home">
+                    <i class="fa fa-shopping-basket shopping-logo"></i>
+                    <span class="navbar-brand-text">E commerce</span>
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">About</a>
+                    </li>
+                </ul>
+
+                <div class="cart-icon">
+                    <a href="@Url.Action("ViewCart", "Home")" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>@(ViewBag.Cart != null ? ViewBag.Cart.Count : 0)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <section class="home" id="Home">
+        <div class="content">
+            <h3>Fresh And <span>Organic</span> Products For You</h3>
+            <p>This Website Is Designed By --- Organisation</p>
+        </div>
+    </section>
+
+</div>
+<section class="features" id="features">
+    <h1 class="heading"> Our <span>Features</span></h1>
+    <div class="row">
+        <div class="col">
+
+            <img src="~/Images/feature-img-1.png" />
+            <h3> Fresh And Organic</h3>
+            <p>Lorem ipsum contains the typefaces more in use, an aspect rendering</p>
+            <button type="button" class="btn btn-outline-success">Read more</button>
+
+        </div>
+
+        <div class="col">
+
+            <img src="~/Images/feature-img-2.png" />
+            <h3> Fast Delivery</h3>
+            <p>Lorem ipsum contains the typefaces more in use, an aspect rendering</p>
+            <button type="button" class="btn btn-outline-success">Read more</button>
+
+        </div>
+
+        <div class="col">
+
+            <img src="~/Images/feature-img-3.png" />
+            <h3> Easy Payment</h3>
+            <p>Lorem ipsum contains the typefaces more in use, an aspect rendering</p>
+            <button type="button" class="btn btn-outline-success">Read more</button>
+        </div>
+    </div>
+</section>
+
+<h1 class="heading" align="center">Products <span>List</span></h1>
+
+@* <a href="@Url.Action("FetchProducts", "Home")" class="btn btn-primary mb-3">Fetch Products</a> *@
+
+<table class="table table-striped">
+    <tbody>
+        <div class="container">
+            <div class="row">
+                @foreach (var product in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="card product-card">
+                            <img src="@product.Thumbnail" alt="@product.Title" class="card-img-top product-thumbnail">
+                            <div class="card-body">
+                                <h5 class="product-title">@product.Title</h5>
+                                <p class="product-description">@product.Description</p>
+                                <p class="product-price">@product.Price.ToString("C")</p>
+                                <div class="product-action">
+                                    <form method="post" action="@Url.Action("AddToCart", "Home")">
+                                        <input type="hidden" name="productId" value="@product.Id" />
+                                        <button type="submit" class="btn btn-success">Add to Cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        
+    </tbody>
+</table>
+<section class="about">
+    <h1 class="heading text-center"><span>About</span></h1>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <img src="Images/main image.jpg" />
+            </div>
+        </div>
+        <div class="col">
+            <p>
+                A supermarket is a self-service shop offering a wide variety of food, beverages and household products, organized into sections. This kind of store is larger and has a wider selection than earlier grocery stores, but is smaller and more limited in the range of merchandise than a hypermarket or big-box market. In everyday United States usage, however, "grocery store" mean "supermarket".
+            </p>
+            <div class="text-center">
+                <button type="button" class="btn btn-outline-success mb-4">Read More</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Include Bootstrap CSS for styling -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">

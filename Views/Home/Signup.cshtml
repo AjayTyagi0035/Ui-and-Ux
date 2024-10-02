@@ -1,0 +1,351 @@
+﻿@model Project.Models.TestData
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+
+<style>
+    .navbar-brand {
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        color: green;
+        text-decoration: none;
+    }
+
+    .shopping-logo {
+        width: 50px;
+        margin-right: 10px;
+        font-size: 3rem;
+        font-weight: bolder;
+    }
+
+    .navbar-toggler-icon {
+        color: gray;
+    }
+
+    .navbar-brand-text {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px;
+        padding: 15px 20px;
+        transition: all 0.3s ease;
+    }
+
+    .navbar {
+        background-color: white;
+        padding: 30px 0;
+        font-size: 20px;
+        border-bottom: 2px solid white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar-nav {
+        justify-content: center;
+    }
+
+    .navbar .navbar-collapse {
+        justify-content: space-between;
+    }
+
+    .login-signup {
+        display: flex;
+        align-items: center;
+    }
+
+    .btn-custom {
+        margin-left: 10px;
+        padding: 8px 15px;
+        font-size: 16px;
+    }
+
+    .navbar-header {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    body {
+        background-color: #eee;
+        font-family: 'Arial';
+    }
+
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 130vh;
+    }
+
+    .content-wrapper {
+        background-color: aliceblue;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .form-group, .form-row {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-radius: 5px;
+    }
+
+    .btn-outline-primary {
+        border-radius: 20px;
+        padding: 10px 20px;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: blue;
+            color: white;
+        }
+
+    .valid-feedback {
+        text-align: center;
+    }
+
+    .form-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .centered-form-row {
+        display: flex;
+        justify-content: center;
+    }
+
+        .centered-form-row .col-md-6 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+    .centered-form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .centered-form-group label,
+        .centered-form-row label {
+            text-align: center;
+        }
+
+        .centered-form-group input,
+        .centered-form-row input {
+            text-align: center;
+        }
+
+    select {
+        appearance: none;
+        background: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%204%205%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M2%200l2%202H0z%22/%3E%3C/svg%3E') no-repeat right 10px center;
+        background-size: 15px 15px;
+    }
+</style>
+
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="logo" asp-action="Index" asp-controller="Home">
+                    <i class="fa fa-shopping-basket shopping-logo"></i>
+                    <span class="navbar-brand-text">E commerce</span>
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">About</a>
+                    </li>
+                </ul>
+                <div class="login-signup">
+                    <a class="btn btn-outline-primary btn-custom" asp-action="Login" asp-controller="Home">Login</a>
+                    <a class="btn btn-primary btn-custom" asp-action="Signup" asp-controller="Home">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<form onsubmit="return validate()" asp-action="Test" asp-controller="Home">
+    <div class="text-center form-container">
+        <div class="content-wrapper">
+            <div class="form-header">
+                <h2>Registration Form</h2>
+            </div>
+
+            <div class="form-row centered-form-row">
+
+                <div class="col-md-7 mb-3">
+                    <label for="validationServer01">Id</label>
+                    <input asp-for="Id" type="number" class="form-control" id="Id" placeholder="Id">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="validationServer01">First name</label>
+                    <input asp-for="Firstname" type="text" class="form-control" id="validationServer01" placeholder="First name">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="validationServer02">Last name</label>
+                    <input asp-for="Lastname" type="text" class="form-control" id="validationServer02" placeholder="Last name">
+                </div>
+
+            </div>
+
+            <div class="form-group centered-form-group">
+                <label for="dob">Date Of Birth:</label>
+                <input asp-for="DOB" type="date" id="dob" name="dob" class="form-control" onchange="calculateAge()">
+            </div>
+
+            <div class="form-group centered-form-group">
+                <label for="age">Age:</label>
+                <input asp-for="Age" type="tel" id="age" name="age" class="form-control" maxlength="3" readonly>
+            </div>
+
+            <div class="form-group centered-form-group">
+                <label for="phone-number">Phone Number:</label>
+                <input asp-for="PhoneNumber" type="text" id="PhoneNumber" name="PhoneNumber" class="form-control" maxlength="10">
+            </div>
+
+            <div class="form-row centered-form-row">
+                <div class="col-md-6">
+                    <label for="inputCity">City</label>
+                    <input asp-for="City" type="text" class="form-control" id="inputCity">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputState">State</label>
+                    <input asp-for="state" type="text" class="form-control" id="inputState">
+                </div>
+            </div>
+
+            <div class="form-group centered-form-group">
+                <label for="inputZip">Zip</label>
+                <input asp-for="ZipCode" type="tel" class="form-control" id="inputZip" maxlength="6">
+            </div>
+
+            <div class="form-group centered-form-group">
+                <label for="gender">Gender:</label>
+                <select asp-for="gender" id="gender" name="gender" class="form-control">
+                    <option disabled selected>Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-row centered-form-row">
+                <div class="col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <input asp-for="Email" type="email" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputPassword4">Password</label>
+                    <input asp-for="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+                </div>   
+            </div>
+
+            <div class="form-group text-center">
+                <button asp-action="Test" type="submit" class="btn btn-outline-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        function validate() {
+
+            debugger;
+            var a = document.getElementById("validationServer01").value;
+            var b = document.getElementById("validationServer02").value;
+            var c = document.getElementById("dob").value;
+            var d = document.getElementById("age").value;
+            var e = document.getElementById("PhoneNumber").value;
+            var f = document.getElementById("inputCity").value;
+            var g = document.getElementById("inputState").value;
+            var h = document.getElementById("inputZip").value;
+            var i = document.getElementById("gender").value;
+            var j = document.getElementById("inputEmail").value;
+            var k = document.getElementById("inputPassword").value;
+            var nameRegex = /^[a-zA-Z]+$/;
+
+            if (a == "" || b == "" || c == "" || d == "" || e == "" || f == "" || g == "" || h == "" || i == "" || j == "" || k == "") {
+                alert("All Fields are mandatory");
+                return false;
+            }
+            else if (e.length > 10 || e.length < 10) {
+                alert("Phone number should be of 10 digits");
+                return false;
+            }
+            else if (isNaN(e)) {
+                alert("Please enter a valid phone number");
+                return false;
+            }
+            else if (!nameRegex.test(a)) {
+                alert("First name should contain only alphabets");
+                return false;
+            }
+            else if (!nameRegex.test(b)) {
+                alert("Last name should contain only alphabets");
+                return false;
+            }
+            else if (isNaN(d) || d <= 0) {
+                alert("Please enter a valid age");
+                return false;
+            }
+            else if (isNaN(h) || h.length > 6 || h.length < 6) {
+                alert("Please enter a valid zip code");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        function calculateAge() {
+
+            debugger;
+            var dob = document.getElementById("dob").value;
+            var dobDate = new Date(dob);
+            var diff_ms = Date.now() - dobDate.getTime();
+            var age_dt = new Date(diff_ms);
+            var age = Math.abs(age_dt.getUTCFullYear() - 1970);
+            document.getElementById("age").value = age;
+        }
+    </script>
+} 

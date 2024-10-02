@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - e_commerce</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="~/Project.styles.css" asp-append-version="true" />
+</head>
+<body>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+
+            <div class="footer-section">
+                <img src="~/Images/logo.jpg" alt="Your Shopping Website Logo" height="50">
+                <p>
+                    Our e-commerce website offers a wide range of products at competitive prices, ensuring a seamless and secure shopping experience with fast delivery and excellent customer service
+                </p>
+            </div>
+
+
+            <div class="footer-section center-section">
+                <p>
+                    Office Address:<br>
+                    Shankar road, Delhi, India
+                </p>
+                <p>&copy; 2024 Your Shopping Website</p>
+            </div>
+
+
+            <div class="footer-section">
+                <form action="/subscribe" method="post">
+                    <label for="email">Subscribe to our newsletter:</label><br>
+                    <input type="email" id="email" name="email" placeholder="Your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <div class="social-links">
+                    <a href="https://www.google.com/" target="_blank" rel=""><i class="fab fa-google"></i></a>
+                    <a href="https://www.facebook.com/yourwebsite" target="_blank" rel=""><i class="fab fa-facebook fa-lg"></i></a>
+                    <a href="https://twitter.com/yourwebsite" target="_blank" rel=""><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="https://www.instagram.com/yourwebsite" target="_blank" rel=""><i class="fab fa-instagram fa-lg"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p><a href="/privacy">Privacy Policy</a> | Contact: <a href="mailto:support@yourwebsite.com">support@yourwebsite.com</a></p>
+        </div>
+    </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</body>
+</html>

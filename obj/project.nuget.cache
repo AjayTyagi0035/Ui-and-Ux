@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "sHDTbHMPXiI=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\tyagi\\source\\repos\\Project\\Project.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\tyagi\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.1\\microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512",
+    "C:\\Users\\tyagi\\.nuget\\packages\\mysqlconnector\\2.3.7\\mysqlconnector.2.3.7.nupkg.sha512",
+    "C:\\Users\\tyagi\\.nuget\\packages\\system.diagnostics.diagnosticsource\\7.0.2\\system.diagnostics.diagnosticsource.7.0.2.nupkg.sha512",
+    "C:\\Users\\tyagi\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

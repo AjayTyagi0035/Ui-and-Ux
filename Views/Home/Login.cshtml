@@ -1,0 +1,255 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .navbar-brand {
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        color: green;
+        text-decoration: none;
+    }
+
+    .shopping-logo {
+        width: 50px;
+        margin-right: 10px;
+        font-size: 3rem;
+        font-weight: bolder;
+    }
+
+    .navbar-toggler-icon {
+        color: gray;
+    }
+
+    .navbar-brand-text {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px;
+        padding: 15px 20px;
+        transition: all 0.3s ease;
+    }
+
+    .navbar {
+        background-color: white;
+        padding: 30px 0;
+        font-size: 20px;
+        border-bottom: 2px solid white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar-nav {
+        justify-content: center;
+    }
+
+    .navbar .navbar-collapse {
+        justify-content: space-between;
+    }
+
+    .login-signup {
+        display: flex;
+        align-items: center;
+    }
+
+    .btn-custom {
+        margin-left: 10px;
+        padding: 8px 15px;
+        font-size: 16px;
+    }
+
+    .navbar-header {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+        min-width: 80vh;
+    }
+
+    .login-container {
+        background-color: aliceblue;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+        align-items: center;
+    }
+
+        .login-container h2 {
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            color: #333;
+        }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+        text-align: left;
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+    .login-container button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .login-container button:hover {
+            background-color: green;
+        }
+
+    #error-message {
+        margin-top: 1rem;
+        color: red;
+        font-size: 1rem;
+        display: none;
+    }
+</style>
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="logo" asp-action="Index" asp-controller="Home">
+                    <i class="fa fa-shopping-basket shopping-logo"></i>
+                    <span class="navbar-brand-text">E commerce</span>
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">About</a>
+                    </li>
+                </ul>
+                <div class="login-signup">
+                    <a class="btn btn-outline-primary btn-custom" asp-action="Login" asp-controller="Home">Login</a>
+                    <a class="btn btn-primary btn-custom" asp-action="Signup" asp-controller="Home">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+<div class="card">
+    <div class="content-wrapper">
+        <div class="login-container">
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="return validateForm()" asp-action="Login" method="post">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <div id="error-message"></div>
+        </div>
+
+    </div>
+</div> 
+
+@* <div class="wrapper">
+    <form id="loginForm" onsubmit="return validateForm()" asp-action="Login" method="post">
+        <h1>Login</h1>
+        <div class="input-box">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Email">
+            <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Password">
+            <i class='bx bxs-lock-alt'></i>
+        </div>
+        <div class="remember-forget">
+            <label><input type="checkbox"> Remember me</label>
+            <a href="#">Forgot password</a>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</div> *@
+
+
+@section Scripts{
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script>
+        function validateForm() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var errorMessage = document.getElementById("error-message");
+
+            if (email === "" || password === "") {
+                errorMessage.innerHTML = "Both fields are required.";
+                return false;
+            }
+
+            // var emailPattern = /\S+\S+\.\S+/;
+            // if (!emailPattern.test(email)) {
+            //     errorMessage.innerHTML = "Please enter a valid email address.";
+            //     return false;
+            // }
+
+            if (password.length < 6) {
+                errorMessage.innerHTML = "Password must be at least 6 characters long.";
+                return false;
+            }
+
+            errorMessage.innerHTML = "";
+            return true;
+        }
+    </script>
+}

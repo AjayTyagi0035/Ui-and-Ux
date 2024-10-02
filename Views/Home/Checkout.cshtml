@@ -1,0 +1,107 @@
+﻿@model Project.Models.Order
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    ViewBag.Title = "Checkout";
+    var cart = ViewBag.Cart as List<Project.Models.Product>;
+}
+<style>
+    h2{
+        text-align:center;
+    }
+</style>
+
+<h2>Checkout</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (cart != null && cart.Count > 0)
+        {
+            decimal totalPrice = 0;
+            foreach (var product in cart)
+            {
+                totalPrice += product.Price;
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Title</td>
+                    <td>@product.Price.ToString("C")</td>
+                </tr>
+            }
+            <tr>
+                <td colspan="2"><strong>Total Price:</strong></td>
+                <td><strong>@totalPrice.ToString("C")</strong></td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">Cart is empty</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form id="checkoutForm" asp-action="ProcessCheckout" method="post">
+    <div class="form-group">
+        <label for="CustomerName">Name</label>
+        <input type="text" class="form-control" id="CustomerName" name="CustomerName" required pattern="[A-Za-z ]+" title="Name should only contain letters and spaces." />
+        <div id="nameError" class="invalid-feedback"></div>
+    </div>
+    <div class="form-group">
+        <label for="PhoneNumber">Phone</label>
+        <input type="tel" class="form-control" id="PhoneNumber" maxlength="10" name="PhoneNumber" required pattern="[0-9]{10}" title="Phone number should be exactly 10 digits." />
+        <div id="phoneError" class="invalid-feedback"></div>
+    </div>
+    <div class="form-group">
+        <label for="ShippingAddress">Shipping Address</label>
+        <textarea class="form-control" id="ShippingAddress" name="ShippingAddress" required></textarea>
+    </div>
+    <div class="d-flex justify-content-between">
+        <a href="@Url.Action("FetchProducts", "Home")" class="btn btn-secondary">Back to Products</a>
+        <button asp-action="ProcessCheckout" type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.getElementById('checkoutForm');
+        form.addEventListener('submit', function (event) {
+            var nameField = document.getElementById('CustomerName');
+            var phoneField = document.getElementById('PhoneNumber');
+            var nameError = document.getElementById('nameError');
+            var phoneError = document.getElementById('phoneError');
+            var valid = true;
+
+
+            if (!/^[A-Za-z\s]+$/.test(nameField.value)) {
+                nameError.textContent = 'Name should only contain letters and spaces.';
+                valid = false;
+            } else {
+                nameError.textContent = '';
+            }
+
+
+            if (!/^\d{10}$/.test(phoneField.value)) {
+                phoneError.textContent = 'Phone number should be exactly 10 digits.';
+                valid = false;
+            } else {
+                phoneError.textContent = '';
+            }
+
+            if (!valid) {
+                event.preventDefault(); 
+            }
+        });
+    });
+</script>

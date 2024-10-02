@@ -1,0 +1,46 @@
+﻿@model List<Project.Models.Product>
+
+<h2 align="center">Shopping Cart</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="container">
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Title</h5>
+                            <p class="card-text">@product.Description</p>
+                            <p class="card-text"><strong>Price:</strong> @product.Price.ToString("C")</p>
+                            <form method="post" action="@Url.Action("RemoveFromCart", "Home")">
+                                <input type="hidden" name="productId" value="@product.Id" />
+                                <button type="submit" class="btn btn-danger">Remove from Cart</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <h4><strong>Total Price: @Model.Sum(p => p.Price).ToString("C")</strong></h4>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        Cart is empty
+    </div>
+}
+
+<div class="d-flex justify-content-between mt-4">
+    <a href="@Url.Action("FetchProducts", "Home")" class="btn btn-primary">Back to Products</a>
+    <a href="@Url.Action("Checkout", "Home")" class="btn btn-primary">Proceed to Checkout</a>
+</div>
+
+<!-- Include Bootstrap CSS for styling -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">

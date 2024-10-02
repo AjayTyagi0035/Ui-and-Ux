@@ -1,0 +1,427 @@
+﻿@{
+    ViewData["Title"] = "MyWebsite";
+}
+@model Project.Models.TestData
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<style>
+    .navbar-brand {
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+    }
+ 
+    .logo {
+        display: flex;
+        align-items: center;
+        color: green;
+        text-decoration: none;
+    }
+
+    .shopping-logo {
+        width: 50px;
+        margin-right: 10px;
+        font-size: 3rem;
+        font-weight: bolder;
+    }
+
+    .navbar-toggler-icon {
+        color: gray;
+    }
+
+    .navbar-brand-text {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px;
+        padding: 15px 20px;
+        transition: all 0.3s ease;
+    }
+
+    .navbar {
+        background-color: white;
+        padding: 30px 0;
+        font-size: 20px;
+        border-bottom: 2px solid white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar-nav {
+        justify-content: center;
+    }
+
+    .navbar .navbar-collapse {
+        justify-content: space-between;
+    }
+
+    .login-signup {
+        display: flex;
+        align-items: center;
+    }
+
+    .btn-custom {
+        margin-left: 10px;
+        padding: 8px 15px;
+        font-size: 16px;
+    }
+
+    .navbar-header {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    section {
+        padding: 2rem 9%;
+    }
+
+    .heading {
+        text-align: center;
+        padding: 2rem 0;
+        padding-bottom: 3rem;
+        font-size: 2.5rem;
+        color: black;
+    }
+
+        .heading span {
+            background: green;
+            color: white;
+            display: inline-block;
+            padding: .2rem 1.5rem;
+            clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0%);
+        }
+
+    .btn {
+        border: 2px solid black;
+        margin-top: 0.2rem;
+        display: inline-block;
+        padding: .8rem 3rem;
+        font-size: 1.7rem;
+        border-radius: .5rem;
+        color: black;
+        cursor: pointer;
+        background: none;
+    }
+
+        .btn:hover {
+            background: green;
+            color: white;
+        }
+
+    section {
+        padding: 2rem 9%;
+    }
+
+    .home {
+        border: 0px solid;
+        display: flex;
+        justify-content: left;
+        background-image: url('./images/banner-img.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding-top: 10rem;
+        padding-bottom: 9rem;
+    }
+
+        .home .content {
+            border: 0px solid;
+            text-align: center;
+            width: 60rem;
+        }
+
+            .home .content h3 {
+                color: var(--black);
+                font-size: 3rem;
+            }
+
+                .home .content h3 span {
+                    color: green;
+                    font-size: 3rem;
+                }
+
+            .home .content p {
+                color: var(--light-color);
+                font-size: 1.4rem;
+                padding: 1rem 0;
+                line-height: 1.8;
+            }
+
+    .features .row .col {
+        display: grid;
+        text-align: center;
+        padding: 3rem 2rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+        .features .row .col:hover {
+            transform: scale(1.05);
+            box-shadow: 1px 1px 10px 4px green;
+        }
+
+    .products .card button {
+        padding: -0.5rem 0.5rem;
+        font-size: 1rem;
+        width: 150px;
+        height: 32px;
+    }
+
+    .cart-icon {
+        display: flex;
+        align-items: center;
+        margin-left: auto; 
+        color: red; 
+        text-decoration: none;
+    }
+
+        .cart-icon i {
+            font-size: 28px; 
+        }
+
+
+    .products .card {
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .products .card:hover {
+            transform: scale(1.05);
+            box-shadow: 2px 4px 8px green;
+        }
+
+        .products .card h1,
+        .products .card .price {
+            font-size: 1.5rem;
+        }
+
+</style>
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="logo" asp-action="Index" asp-controller="Home">
+                    <i class="fa fa-shopping-basket shopping-logo"></i>
+                    <span class="navbar-brand-text">E commerce</span>
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">About</a>
+                    </li>
+                </ul>
+
+                <div class="cart-icon">
+                    <a href="#" class="text-dark">
+                        <i class="fa fa-shopping-cart"></i>
+
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <section class="home" id="Home">
+        <div class="content">
+            <h3>Fresh And <span>Organic</span> Products For You</h3>
+            <p>This Website Is Designed By BSES Organisation</p>
+            <button type="button" class="btn btn-outline-success">Shop Now</button>
+        </div>
+    </section>
+</div>
+
+<section class="features" id="features">
+    <h1 class="heading"> Our <span>Features</span></h1>
+    <div class="row">
+        <div class="col">
+
+            <img src="~/Images/feature-img-1.png" />
+            <h3> Fresh And Organic</h3>
+            <p>Lorem ipsum contains the typefaces more in use, an aspect rendering</p>
+            <button type="button" class="btn btn-outline-success">Read more</button>
+
+        </div>
+
+        <div class="col">
+
+            <img src="~/Images/feature-img-2.png" />
+            <h3> Fast Delivery</h3>
+            <p>Lorem ipsum contains the typefaces more in use, an aspect rendering</p>
+            <button type="button" class="btn btn-outline-success">Read more</button>
+
+        </div>
+
+        <div class="col">
+
+            <img src="~/Images/feature-img-3.png" />
+            <h3> Easy Payment</h3>
+            <p>Lorem ipsum contains the typefaces more in use, an aspect rendering</p>
+            <button type="button" class="btn btn-outline-success">Read more</button>
+        </div>
+    </div>
+</section>
+<section class="products" id="Products">
+    <h1 class="heading"> Our <span> Products </span></h1>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <img src="~/images/product-2.png">
+                <h1> Onion</h1>
+                <div class="price"> $12.99/- </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-outline-success mb-4">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <img src="~/images/product-1.png">
+                <h1> Orange</h1>
+                <div class="price"> $12.80/- </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-outline-success mb-4">Add to Cart</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <img src="~/images/product-3.png">
+                <h1> Meat</h1>
+                <div class="price"> $-15.99/-</div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-outline-success mb-4">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <img src="~/images/product-4.png">
+                <h1> Cabbage</h1>
+                <div class="price"> $9/- </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-outline-success mb-4">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <img src="~/images/product-5.png">
+                <h1> Potato</h1>
+                <div class="price"> $10/-</div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-outline-success mb-4">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <img src="~/images/product-6.png">
+                <h1> Avocado</h1>
+                <div class="price"> $11/</div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-outline-success mb-4">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <img src="~/images/product-7.png">
+                <h1> Carrot</h1>
+                <div class="price"> $12/-</div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-outline-success mb-4">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <img src="~/images/product-8.png">
+                <h1> Lemon</h1>
+                <div class="price"> $12.02/-</div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-outline-success mb-4">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <img src="~/images/product-9.png">
+                <h1> Cucumber</h1>
+                <div class="price"> $15/-</div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-outline-success mb-4">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="about">
+    <h1 class="heading text-center"><span>About</span></h1>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <img src="~/Images/main image.jpg" />
+            </div>
+        </div>
+        <div class="col">
+            <p>
+                A supermarket is a self-service shop offering a wide variety of food, beverages and household products, organized into sections. This kind of store is larger and has a wider selection than earlier grocery stores, but is smaller and more limited in the range of merchandise than a hypermarket or big-box market. In everyday United States usage, however, "grocery store" mean "supermarket".
+            </p>
+            <div class="text-center">
+                <button type="button" class="btn btn-outline-success mb-4">Read More</button>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-examplehash" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script>
+
+    </script>
+}
